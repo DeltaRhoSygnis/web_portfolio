@@ -220,14 +220,22 @@ p + p {
   border-radius: var(--radius);
 }
 
-/* aspect-ratio keeps a 16:9 box; object-fit crops the photo to
-   fill it instead of stretching it out of shape. */
+/* Every project image gets the same box, whatever its original size.
+   height + object-fit crop the picture to fill the box, so the square
+   logo and the wide illustrations line up exactly. */
 .card img {
   display: block;
   width: 100%;
-  aspect-ratio: 16 / 9;
+  height: 10rem;
   object-fit: cover;
   border-bottom: 1px solid var(--line);
+}
+
+/* The cpractice mark is square and has its own dark background, so it is
+   fitted inside the frame instead of being cropped. */
+.card img.is-logo {
+  object-fit: contain;
+  background: #040b1b;
 }
 
 .card-body {
@@ -263,7 +271,58 @@ p + p {
   border-radius: 999px;
 }
 
-/* 11. Contact */
+/* 11. Certifications: a list of rows, each a small image plus the details. */
+.certs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  padding: 0;
+  list-style: none;
+}
+
+.cert {
+  flex: 1 1 18rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.75rem;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+}
+
+/* The certificate scans are wide documents, so show all of them rather
+   than cropping, on a white background like the paper they are. */
+.cert img {
+  flex: none;
+  width: 6rem;
+  height: 4.75rem;
+  object-fit: contain;
+  background: #ffffff;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+}
+
+.cert-text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.cert-text h3 {
+  font-size: 0.95rem;
+}
+
+.cert-text p + p {
+  margin-top: 0.2rem;
+}
+
+.cert-meta {
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+
+/* 12. Contact */
 .contact-lines {
   display: flex;
   flex-wrap: wrap;
@@ -271,7 +330,7 @@ p + p {
   margin-top: 0.85rem;
 }
 
-/* 12. Footer */
+/* 13. Footer */
 .site-footer {
   padding-top: 2rem;
   padding-bottom: 3rem;
@@ -280,7 +339,7 @@ p + p {
   color: var(--muted);
 }
 
-/* 13. One breakpoint. Below 640px the page is the phone layout;
+/* 14. One breakpoint. Below 640px the page is the phone layout;
       above it, the headline and photo get bigger and the sections
       get more breathing room. */
 @media (min-width: 640px) {
