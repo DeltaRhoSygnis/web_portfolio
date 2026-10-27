@@ -220,22 +220,32 @@ p + p {
   border-radius: var(--radius);
 }
 
-/* Every project image gets the same box, whatever its original size.
-   height + object-fit crop the picture to fill the box, so the square
-   logo and the wide illustrations line up exactly. */
-.card img {
-  display: block;
-  width: 100%;
+/* Every project image sits in a frame of exactly 10rem. The frame decides
+   the size, not the picture — so the square logo and the wide illustrations
+   line up whatever their own dimensions are. */
+.thumb {
+  flex: none;
   height: 10rem;
-  object-fit: cover;
+  overflow: hidden;
   border-bottom: 1px solid var(--line);
+  background: var(--card);
 }
 
-/* The cpractice mark is square and has its own dark background, so it is
-   fitted inside the frame instead of being cropped. */
-.card img.is-logo {
-  object-fit: contain;
+.thumb img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* The cpractice mark is square and dark, so it is fitted inside the frame
+   on its own background colour instead of being cropped. */
+.thumb.is-logo {
   background: #040b1b;
+}
+
+.thumb.is-logo img {
+  object-fit: contain;
 }
 
 .card-body {
