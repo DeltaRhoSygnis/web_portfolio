@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Jessie James M. Bote — Portfolio</title>
+  <meta name="description" content="Portfolio of Jessie James M. Bote, a first-year BSIT student at Bukidnon State University.">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Name and navigation. The links jump to the id of each section. -->
+  <header class="site-header">
+    <a class="brand" href="#top">Jessie James M. Bote</a>
+    <nav class="site-nav" aria-label="Main">
+      <a href="#home">Home</a>
+      <a href="#about">About</a>
+      <a href="#skills">Skills</a>
+      <a href="#projects">Projects</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <main id="top">
+
+    <!-- ── Home: name, photo, one-line introduction ───────── -->
+    <section class="intro" id="home" aria-labelledby="home-title">
+      <img class="portrait" src="assets/profile.webp" alt="Portrait of Jessie James M. Bote" width="600" height="600">
+
+      <div class="intro-text">
+        <p class="eyebrow">BSIT student · Bukidnon, Philippines</p>
+        <h1 id="home-title">Jessie James M. Bote</h1>
+
+        <p>
+          I build small, careful things for the web — clean grids, quiet
+          interfaces, and code that actually ships.
+        </p>
+
+        <p class="links">
+          <a href="https://github.com/DeltaRhoSygnis">GitHub</a>
+          <a href="mailto:jamesjessiemodesto@gmail.com">Email</a>
+          <a href="assets/resume.pdf">Résumé</a>
+        </p>
+      </div>
+    </section>
+
+    <!-- ── About: course, year level, interests, goals ────── -->
+    <section class="section" id="about" aria-labelledby="about-title">
+      <h2 id="about-title">About me</h2>
+
+      <p>
+        I’m a <strong>first-year BSIT student</strong> at Bukidnon State
+        University. Most of what I know came from building things: a C practice
+        tool, a few small command-line programs, and this site.
+      </p>
+      <p>
+        My interests are <strong>systems, security, and interface design</strong>.
+        Right now I’m working through CS50x and Cisco’s ethical hacking course.
+      </p>
+      <p>
+        My goal is to get good enough at all three to work on software that other
+        people depend on — and to keep shipping small things while I get there.
+      </p>
+    </section>
+
+    <!-- ── Skills ────────────────────────────────────────── -->
+    <section class="section" id="skills" aria-labelledby="skills-title">
+      <h2 id="skills-title">Skills</h2>
+
+      <div class="columns">
+        <div class="column">
+          <h3>Technical</h3>
+          <ul>
+            <li>HTML</li>
+            <li>CSS</li>
+            <li>Python</li>
+            <li>C (basics)</li>
+            <li>Git &amp; GitHub</li>
+          </ul>
+        </div>
+
+        <div class="column">
+          <h3>Tools</h3>
+          <ul>
+            <li>Linux / Termux</li>
+            <li>GitHub Actions</li>
+            <li>Pytest</li>
+            <li>Markdown</li>
+          </ul>
+        </div>
+
+        <div class="column">
+          <h3>Personal</h3>
+          <ul>
+            <li>Self-directed learning</li>
+            <li>Writing documentation</li>
+            <li>Breaking problems into steps</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Projects ──────────────────────────────────────── -->
+    <section class="section" id="projects" aria-labelledby="projects-title">
+      <h2 id="projects-title">Projects</h2>
+
+      <div class="cards">
+        <article class="card">
+          <img src="assets/cpractice-icon.png" alt="The cpractice app icon" width="512" height="512">
+          <div class="card-body">
+            <h3>cpractice</h3>
+            <p>
+              An AI-assisted C practice platform. The model explains, but a
+              validated test suite decides whether a submission actually passes.
+            </p>
+            <p class="tags"><span>Python</span><span>C</span><span>Grading</span></p>
+            <p><a href="https://github.com/DeltaRhoSygnis/cpractice">View repository</a></p>
+          </div>
+        </article>
+
+        <article class="card">
+          <img src="assets/bsit-codes.svg" alt="Illustration of a code editor" width="320" height="180">
+          <div class="card-body">
+            <h3>bsit_codes</h3>
+            <p>
+              A running compilation of code from my BSIT coursework at BukSU —
+              exercises, activities, and notes.
+            </p>
+            <p class="tags"><span>C</span><span>C++</span><span>Python</span></p>
+            <p><a href="https://github.com/DeltaRhoSygnis/BSIT_codes">View repository</a></p>
+          </div>
+        </article>
+
+        <article class="card">
+          <img src="assets/it-fun.svg" alt="Illustration of a slide deck" width="320" height="180">
+          <div class="card-body">
+            <h3>IT fun presentation</h3>
+            <p>
+              The slide deck I built for our C++ and Godot Engine worksheet
+              session, in two versions, filed with the rest of my coursework.
+            </p>
+            <p class="tags"><span>Godot</span><span>C++</span><span>Coursework</span></p>
+            <p><a href="https://deltarhosygnis.github.io/BSIT_codes/it-presentation/">View the slides</a></p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- ── Contact ───────────────────────────────────────── -->
+    <section class="section" id="contact" aria-labelledby="contact-title">
+      <h2 id="contact-title">Contact</h2>
+      <p>For school work, collaborations, or just to say hello — my inbox is open.</p>
+      <p class="contact-lines">
+        <a href="mailto:jamesjessiemodesto@gmail.com">jamesjessiemodesto@gmail.com</a>
+        <a href="https://github.com/DeltaRhoSygnis">github.com/DeltaRhoSygnis</a>
+      </p>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <p>© 2026 Jessie James M. Bote. Built with HTML and CSS.</p>
+  </footer>
+
+</body>
+</html>
