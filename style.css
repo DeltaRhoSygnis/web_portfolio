@@ -54,6 +54,14 @@ body {
   background: var(--bg);
 }
 
+/* The sticky header sits over the top of the page, so a jump to #about
+   or #projects has to stop below it instead of hiding the heading
+   underneath. On a phone the name and the navigation sit on two lines,
+   so the bar is about 8rem tall. */
+html {
+  scroll-padding-top: 8.5rem;
+}
+
 /* 4. One centred column. Header, content and footer share it so
       their left edges line up on every screen size. */
 .site-header,
@@ -84,21 +92,45 @@ a:focus-visible {
 
 /* 6. Header: name on the left, navigation on the right.
       flex-wrap lets the navigation drop onto a second line on
-      a narrow phone instead of squashing. */
+      a narrow phone instead of squashing.
+
+      position: sticky keeps the bar at the top of the window while the
+      page scrolls behind it, which is why it needs a solid background.
+      The header itself is only 60rem wide, so the box-shadow paints that
+      same background out to both edges of the screen; clip-path then trims
+      the shadow off above and below the bar so only the sides are filled. */
 .site-header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  align-items: baseline;
+  align-items: center;
   gap: 1rem;
   padding-top: 2rem;
   padding-bottom: 2rem;
+  background: var(--bg);
+  box-shadow: 0 0 0 100vmax var(--bg);
+  clip-path: inset(0 -100vmax);
   border-bottom: 1px solid var(--line);
 }
 
+/* The mark is the same file the browser tab uses, so the icon and the
+   header can never drift apart. alt="" because the name next to it
+   already says who this is. */
 .brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
   font-weight: 600;
   border-bottom: 0;
+}
+
+.brand-mark {
+  flex: none;
+  width: 1.75rem;
+  height: 1.75rem;
 }
 
 .site-nav {
@@ -353,6 +385,11 @@ p + p {
       above it, the headline and photo get bigger and the sections
       get more breathing room. */
 @media (min-width: 640px) {
+  /* The header fits on one line here, so it is shorter. */
+  html {
+    scroll-padding-top: 6.25rem;
+  }
+
   h1 {
     font-size: 3rem;
   }
