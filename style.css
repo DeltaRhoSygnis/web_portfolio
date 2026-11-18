@@ -1,83 +1,127 @@
-/* ============================================================
-   Jessie James M. Bote — simple portfolio
-   One stylesheet, no framework, no JavaScript.
-   Read it top to bottom: colours → page → header → sections →
-   cards → big screens.
-   ============================================================ */
+/* 01. CSS VARIABLES*/
 
-/* 1. Colours and the corner radius, defined once.
-      Every rule below uses these names instead of a hex code. */
 :root {
   --bg: #ffffff;
   --card: #fafafa;
+
   --text: #1a1a1a;
   --muted: #5f5f5f;
+
   --line: #e4e4e7;
+  --grid: rgba(128, 128, 128, 0.16);
+
   --radius: 12px;
+
+  --container: 960px;
+  --grid-size: 32px;
 }
 
-/* If the phone or laptop is in dark mode, swap the same six colours.
-   Nothing else in the file has to change. */
+/* Dark mode */
+
 @media (prefers-color-scheme: dark) {
   :root {
     --bg: #101012;
     --card: #17171a;
+
     --text: #eeeeee;
     --muted: #a0a0a8;
+
     --line: #2a2a30;
+    --grid: rgba(180, 180, 190, 0.12);
   }
 }
 
-/* 2. Reset. The browser adds margins by default; this removes them
-      so every gap in this file is one I chose on purpose. */
+
+/*  02. GLOBAL RESET */
+
 *,
 *::before,
 *::after {
   box-sizing: border-box;
 }
 
-body,
-h1,
-h2,
-h3,
-p,
-ul {
+html {
+  margin: 0;
+  padding: 0;
+}
+
+body,h1,h2,h3,p,ul {
   margin: 0;
 }
 
-/* 3. The page. Type is set once here and everything inherits it. */
+ul {
+  padding-left: 0;
+}
+
+
+/* 03. GLOBAL STYLES*/
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 136px;
+}
+
 body {
-  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  font-family:
+    system-ui,
+    -apple-system,
+    "Segoe UI",
+    Roboto,
+    sans-serif;
+
   font-size: 16px;
   line-height: 1.6;
+
   color: var(--text);
-  background: var(--bg);
+  background-color: var(--bg);
 }
 
-/* The sticky header sits over the top of the page, so a jump to #about
-   or #projects has to stop below it instead of hiding the heading
-   underneath. On a phone the name and the navigation sit on two lines,
-   so the bar is about 8rem tall. */
-html {
-  scroll-padding-top: 8.5rem;
+
+/* 04. FIXED GRID BACKGROUND */
+
+body {
+  background-image:
+    linear-gradient(
+      to right,
+      var(--grid) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      to bottom,
+      var(--grid) 1px,
+      transparent 1px
+    );
+
+  background-size:
+    var(--grid-size) var(--grid-size);
+
+  background-position: center;
+  background-attachment: fixed;
 }
 
-/* 4. One centred column. Header, content and footer share it so
-      their left edges line up on every screen size. */
+/* The grid stays behind content.
+   Cards and header retain their own solid backgrounds. */
+
+
+/* 05. SHARED CONTAINER  */
+
 .site-header,
 main,
 .site-footer {
-  max-width: 60rem;
+  max-width: var(--container);
   margin: 0 auto;
-  padding-left: 1.25rem;
-  padding-right: 1.25rem;
+
+  padding-left: 20px;
+  padding-right: 20px;
 }
 
-/* 5. Links. Underline only on hover, but always a visible ring
-      when the page is used with a keyboard. */
+
+/* 06. LINKS AND ACCESSIBILITY */
+
 a {
   color: inherit;
   text-decoration: none;
+
   border-bottom: 1px solid var(--line);
 }
 
@@ -90,188 +134,276 @@ a:focus-visible {
   outline-offset: 3px;
 }
 
-/* 6. Header: name on the left, navigation on the right.
-      flex-wrap lets the navigation drop onto a second line on
-      a narrow phone instead of squashing.
 
-      position: sticky keeps the bar at the top of the window while the
-      page scrolls behind it, which is why it needs a solid background.
-      The header itself is only 60rem wide, so the box-shadow paints that
-      same background out to both edges of the screen; clip-path then trims
-      the shadow off above and below the bar so only the sides are filled. */
+/* 07. HEADER AND NAVIGATION */
+
 .site-header {
   position: sticky;
   top: 0;
   z-index: 10;
+
   display: flex;
   flex-wrap: wrap;
+
   justify-content: space-between;
   align-items: center;
-  gap: 1rem;
-  padding-top: 2rem;
-  padding-bottom: 2rem;
+
+  gap: 16px;
+
+  padding-top: 32px;
+  padding-bottom: 32px;
+
   background: var(--bg);
+
   box-shadow: 0 0 0 100vmax var(--bg);
   clip-path: inset(0 -100vmax);
+
   border-bottom: 1px solid var(--line);
 }
 
-/* The mark is the same file the browser tab uses, so the icon and the
-   header can never drift apart. alt="" because the name next to it
-   already says who this is. */
+/* Brand */
+
 .brand {
   display: inline-flex;
   align-items: center;
-  gap: 0.6rem;
+
+  gap: 10px;
+
   font-weight: 600;
+
   border-bottom: 0;
 }
 
 .brand-mark {
   flex: none;
-  width: 1.75rem;
-  height: 1.75rem;
+
+  width: 28px;
+  height: 28px;
 }
+
+/* Navigation */
 
 .site-nav {
   display: flex;
   flex-wrap: wrap;
-  gap: 1.25rem;
-  font-size: 0.9rem;
+
+  gap: 20px;
+
+  font-size: 14px;
 }
 
-/* 7. About: photo and text side by side. On a phone the text
-      wraps underneath because it refuses to get narrower than
-      20rem (flex-basis). */
+.site-nav a {
+  display: inline-block;
+
+  transition:
+    color 180ms ease,
+    transform 180ms ease,
+    border-color 180ms ease;
+}
+
+.site-nav a:hover {
+  transform: translateY(-2px);
+}
+
+.site-nav a:active {
+  transform: scale(0.94);
+}
+
+
+/* 08. INTRODUCTION */
+
 .intro {
   display: flex;
   flex-wrap: wrap;
+
   align-items: center;
-  gap: 2rem;
-  padding-top: 3rem;
-  padding-bottom: 3rem;
+  gap: 32px;
+
+  padding-top: 48px;
+  padding-bottom: 48px;
+
+  scroll-margin-top: 136px;
 }
 
+/* Profile image */
+
 .portrait {
-  width: 9rem;
-  height: 9rem;
+  width: 144px;
+  height: 144px;
+
   border-radius: var(--radius);
+
   object-fit: cover;
 }
 
+/* Introduction text */
+
 .intro-text {
-  flex: 1 1 20rem;
+  flex: 1 1 320px;
 }
 
 .eyebrow {
-  font-size: 0.75rem;
+  font-size: 12px;
   letter-spacing: 0.12em;
+
   text-transform: uppercase;
+
   color: var(--muted);
 }
 
 h1 {
-  font-size: 2.25rem;
+  font-size: 36px;
   line-height: 1.15;
-  margin-top: 0.5rem;
-  margin-bottom: 1rem;
+
+  margin-top: 8px;
+  margin-bottom: 16px;
 }
 
-/* One space between consecutive paragraphs, without giving every
-   paragraph its own margin rule. */
+/* Paragraph spacing */
+
 p + p {
-  margin-top: 0.85rem;
+  margin-top: 14px;
 }
+
+/* Social links */
 
 .links {
   display: flex;
   flex-wrap: wrap;
-  gap: 1rem;
-  margin-top: 1.5rem;
-  font-size: 0.9rem;
+
+  gap: 16px;
+
+  margin-top: 24px;
+
+  font-size: 14px;
 }
 
-/* 8. Every section after the first gets a thin line on top. */
+
+/*  09. SECTION LAYOUT */
+
 .section {
-  padding-top: 2.5rem;
-  padding-bottom: 2.5rem;
+  padding-top: 40px;
+  padding-bottom: 40px;
+
   border-top: 1px solid var(--line);
+
+  scroll-margin-top: 136px;
 }
 
 .section h2 {
-  margin-bottom: 1.25rem;
-  font-size: 0.75rem;
+  margin-bottom: 20px;
+
+  font-size: 12px;
   letter-spacing: 0.14em;
+
   text-transform: uppercase;
+
   color: var(--muted);
 }
 
-/* 9. Skills: three equal boxes that wrap to one column when the
-      screen is too narrow for three. */
+/* Highlight when targeted through navigation */
+
+.section:target {
+  animation: section-highlight 700ms ease;
+}
+
+@keyframes section-highlight {
+  0% {
+    background-color: var(--card);
+  }
+
+  100% {
+    background-color: transparent;
+  }
+}
+
+
+/* 10. SKILLS */
+
 .columns {
   display: flex;
   flex-wrap: wrap;
-  gap: 1rem;
+
+  gap: 16px;
 }
 
 .column {
-  flex: 1 1 11rem;
-  padding: 1rem 1.25rem;
+  flex: 1 1 176px;
+
+  padding: 16px 20px;
+
   background: var(--card);
+
   border: 1px solid var(--line);
   border-radius: var(--radius);
 }
 
 .column h3 {
-  margin-bottom: 0.4rem;
-  font-size: 0.75rem;
+  margin-bottom: 6px;
+
+  font-size: 12px;
   letter-spacing: 0.1em;
+
   text-transform: uppercase;
+
   color: var(--muted);
 }
 
 .column ul {
-  padding-left: 1.1rem;
-  font-size: 0.95rem;
+  padding-left: 18px;
+
+  font-size: 15px;
 }
 
-/* 10. Projects: the same wrapping idea, one card each. */
+
+/* 11. PROJECTS */
+
 .cards {
   display: flex;
   flex-wrap: wrap;
-  gap: 1.25rem;
+
+  gap: 20px;
 }
 
 .card {
-  flex: 1 1 16rem;
+  flex: 1 1 256px;
+
   display: flex;
   flex-direction: column;
+
   overflow: hidden;
+
   background: var(--card);
+
   border: 1px solid var(--line);
   border-radius: var(--radius);
 }
 
-/* Every project image sits in a frame of exactly 10rem. The frame decides
-   the size, not the picture — so the square logo and the wide illustrations
-   line up whatever their own dimensions are. */
+/* Project image frame */
+
 .thumb {
   flex: none;
-  height: 10rem;
+
+  height: 160px;
+
   overflow: hidden;
+
   border-bottom: 1px solid var(--line);
+
   background: var(--card);
 }
 
 .thumb img {
   display: block;
+
   width: 100%;
   height: 100%;
+
   object-fit: cover;
 }
 
-/* The cpractice mark is square and dark, so it is fitted inside the frame
-   on its own background colour instead of being cropped. */
+/* Square logo */
+
 .thumb.is-logo {
   background: #040b1b;
 }
@@ -280,127 +412,242 @@ p + p {
   object-fit: contain;
 }
 
+/* Project details */
+
 .card-body {
   display: flex;
   flex-direction: column;
-  gap: 0.6rem;
-  padding: 1.1rem 1.25rem 1.25rem;
+
+  gap: 10px;
+
+  padding: 18px 20px 20px;
 }
 
 .card-body h3 {
-  font-size: 1rem;
+  font-size: 16px;
 }
 
 .card-body p {
-  font-size: 0.95rem;
+  font-size: 15px;
 }
 
 .card-body p + p {
   margin-top: 0;
 }
 
+/* Technology tags */
+
 .tags {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.4rem;
-  font-size: 0.75rem;
+
+  gap: 6px;
+
+  font-size: 12px;
   color: var(--muted);
 }
 
 .tags span {
-  padding: 0.1rem 0.55rem;
+  padding: 2px 9px;
+
   border: 1px solid var(--line);
   border-radius: 999px;
 }
 
-/* 11. Certifications: a list of rows, each a small image plus the details. */
+
+/* 12. CERTIFICATIONS */
+
 .certs {
   display: flex;
   flex-wrap: wrap;
-  gap: 1rem;
+
+  gap: 16px;
+
   padding: 0;
+
   list-style: none;
 }
 
 .cert {
-  flex: 1 1 18rem;
+  flex: 1 1 288px;
+
   display: flex;
   align-items: center;
-  gap: 1rem;
-  padding: 0.75rem;
+
+  gap: 16px;
+
+  padding: 12px;
+
   background: var(--card);
+
   border: 1px solid var(--line);
   border-radius: var(--radius);
 }
 
-/* The certificate scans are wide documents, so show all of them rather
-   than cropping, on a white background like the paper they are. */
+/* Certificate image */
+
 .cert img {
   flex: none;
-  width: 6rem;
-  height: 4.75rem;
+
+  width: 96px;
+  height: 76px;
+
   object-fit: contain;
+
   background: #ffffff;
+
   border: 1px solid var(--line);
   border-radius: 6px;
 }
 
+/* Certificate information */
+
 .cert-text {
   display: flex;
   flex-direction: column;
-  gap: 0.15rem;
+
+  gap: 2px;
 }
 
 .cert-text h3 {
-  font-size: 0.95rem;
+  font-size: 15px;
 }
 
 .cert-text p + p {
-  margin-top: 0.2rem;
+  margin-top: 3px;
 }
 
 .cert-meta {
-  font-size: 0.8rem;
+  font-size: 13px;
   color: var(--muted);
 }
 
-/* 12. Contact */
+
+/* 13. CONTACT */
+
 .contact-lines {
   display: flex;
   flex-wrap: wrap;
-  gap: 1.25rem;
-  margin-top: 0.85rem;
+
+  gap: 20px;
+
+  margin-top: 14px;
 }
 
-/* 13. Footer */
+
+/* 14. FOOTER  */
+
 .site-footer {
-  padding-top: 2rem;
-  padding-bottom: 3rem;
+  padding-top: 32px;
+  padding-bottom: 48px;
+
   border-top: 1px solid var(--line);
-  font-size: 0.85rem;
+
+  font-size: 14px;
   color: var(--muted);
 }
 
-/* 14. One breakpoint. Below 640px the page is the phone layout;
-      above it, the headline and photo get bigger and the sections
-      get more breathing room. */
+/* TABLET AND DESKTOP */
+
 @media (min-width: 640px) {
-  /* The header fits on one line here, so it is shorter. */
+
   html {
-    scroll-padding-top: 6.25rem;
+    scroll-padding-top: 100px;
   }
 
   h1 {
-    font-size: 3rem;
+    font-size: 48px;
   }
 
   .portrait {
-    width: 12rem;
-    height: 12rem;
+    width: 192px;
+    height: 192px;
   }
 
   .section {
-    padding-top: 3.5rem;
-    padding-bottom: 3.5rem;
+    padding-top: 56px;
+    padding-bottom: 56px;
+  }
+
+  .section,
+  .intro {
+    scroll-margin-top: 100px;
   }
 }
+
+
+/* SMALL MOBILE DEVICES */
+
+@media (max-width: 480px) {
+
+  .site-header {
+    padding-top: 20px;
+    padding-bottom: 20px;
+
+    gap: 14px;
+  }
+
+  .site-nav {
+    gap: 14px;
+    font-size: 13px;
+  }
+
+  .intro {
+    gap: 20px;
+
+    padding-top: 32px;
+    padding-bottom: 32px;
+  }
+
+  .portrait {
+    width: 112px;
+    height: 112px;
+  }
+
+  h1 {
+    font-size: 32px;
+  }
+
+  .section {
+    padding-top: 32px;
+    padding-bottom: 32px;
+  }
+
+  .thumb {
+    height: 144px;
+  }
+
+  .cert img {
+    width: 80px;
+    height: 64px;
+  }
+}
+
+
+/*
+   17. REDUCED MOTION / ACCESSIBILITY
+    */
+
+@media (prefers-reduced-motion: reduce) {
+
+  html {
+    scroll-behavior: auto;
+  }
+
+  .site-nav a {
+    transition: none;
+  }
+
+  .site-nav a:hover,
+  .site-nav a:active {
+    transform: none;
+  }
+
+  .section:target {
+    animation: none;
+  }
+}
+
+/*
+   END OF STYLESHEET
+    */
