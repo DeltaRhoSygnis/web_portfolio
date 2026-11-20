@@ -1,26 +1,7 @@
 /* 01. CSS VARIABLES*/
 
 :root {
-  --bg: #ffffff;
-  --card: #fafafa;
-
-  --text: #1a1a1a;
-  --muted: #5f5f5f;
-
-  --line: #e4e4e7;
-  --grid: rgba(128, 128, 128, 0.16);
-
-  --radius: 12px;
-
-  --container: 960px;
-  --grid-size: 32px;
-}
-
-/* Dark mode */
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --bg: #101012;
+  --bg: #101012;
     --card: #17171a;
 
     --text: #eeeeee;
@@ -28,7 +9,11 @@
 
     --line: #2a2a30;
     --grid: rgba(180, 180, 190, 0.12);
-  }
+
+  --radius: 12px;
+
+  --container: 960px;
+  --grid-size: 32px;
 }
 
 
